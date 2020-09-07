@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 
 class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
@@ -75,11 +76,14 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
         cell.lblMovieName.text = arrMovie[indexPath.row].Title
         cell.lblYear.text = arrMovie[indexPath.row].Year
         cell.lblType.text = arrMovie[indexPath.row]._Type
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let query = URL(string: "https://www.imdb.com/title/\(arrMovie[indexPath.row].imdbID)")
+        let nextVC = SFSafariViewController(url: query!)
+        present(nextVC,animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

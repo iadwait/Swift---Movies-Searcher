@@ -15,7 +15,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
     @IBOutlet weak var tableListMovies: UITableView!
     
     var arrMovie:[Movie] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,7 +23,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
         tableListMovies.delegate = self
         tableListMovies.dataSource = self
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchMovies()
         return true
@@ -70,12 +70,40 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableListMovies.dequeueReusableCell(withIdentifier: "MovieListViewCell") as! MovieListViewCell
+        cell.imgPoster.fetchImage(fromURL: arrMovie[indexPath.row].Poster)
+        cell.lblMovieName.text = arrMovie[indexPath.row].Title
+        cell.lblYear.text = arrMovie[indexPath.row].Year
+        cell.lblType.text = arrMovie[indexPath.row]._Type
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 242
+    }
+    
 }
 
+
+extension UIImageView
+{
+    func fetchImage(fromURL: String)
+    {
+        guard let imgURL = URL(string: fromURL) else { return }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: imgURL) { (data, response, err) in
+            if let imgData = data,err == nil {
+                DispatchQueue.main.async {
+                    let image = UIImage(data: imgData)
+                    self.image = image
+                }
+                
+            }
+        }
+        task.resume()
+    }
+}

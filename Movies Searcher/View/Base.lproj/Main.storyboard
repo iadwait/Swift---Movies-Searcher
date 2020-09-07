@@ -27,7 +27,7 @@
                                 <rect key="frame" x="10" y="114" width="394" height="748"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="242" id="ZNk-0m-sSn">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MovieListViewCell" rowHeight="242" id="ZNk-0m-sSn" customClass="MovieListViewCell" customModule="Movies_Searcher" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="394" height="242"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZNk-0m-sSn" id="4J1-22-PdE">
@@ -110,6 +110,12 @@
                                                 <constraint firstItem="v7i-ub-Fzf" firstAttribute="top" secondItem="X1x-gR-6bi" secondAttribute="bottom" constant="2" id="uWq-01-QwR"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgPoster" destination="zJP-mN-fIK" id="vlt-Ra-dCb"/>
+                                            <outlet property="lblMovieName" destination="XN3-PL-4Ld" id="3es-lp-jHd"/>
+                                            <outlet property="lblType" destination="ORF-lu-UaJ" id="TfP-a9-Kp6"/>
+                                            <outlet property="lblYear" destination="74u-oR-w7f" id="Pt9-Uf-P7N"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

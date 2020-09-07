@@ -23,6 +23,8 @@ class MovieListViewCell: UITableViewCell {
         backView.layer.borderColor = UIColor.gray.cgColor
         backView.layer.borderWidth = 1
         backView.layer.cornerRadius = 15
+        imgPoster.clipsToBounds = true
+        imgPoster.contentMode = .scaleToFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

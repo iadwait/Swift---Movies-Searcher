@@ -87,7 +87,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 242
+        return 200
     }
     
 }

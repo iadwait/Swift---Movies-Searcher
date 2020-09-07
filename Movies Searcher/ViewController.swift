@@ -35,7 +35,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
         guard let text = txtFieldSearchMovie.text,txtFieldSearchMovie.text != "" else {
             return
         }
-        let strURL = "https://www.omdbapi.com/?apikey=4acadd1&s=fast%20and&type=movie"
+        let query = text.replacingOccurrences(of: " ", with: "%20")
+        let strURL = "https://www.omdbapi.com/?apikey=4acadd1&s=\(query)&type=movie"
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: URL(string: strURL)!) { (data, response, err) in
             guard let data = data,err == nil else { return }

@@ -8,9 +8,6 @@
 
 import UIKit
 
-struct Movie {
-    
-}
 
 class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
     
@@ -35,6 +32,16 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
     func searchMovies()
     {
         txtFieldSearchMovie.resignFirstResponder()
+        guard let text = txtFieldSearchMovie.text,txtFieldSearchMovie.text != "" else {
+            return
+        }
+        let strURL = "http://www.omdbapi.com/?apikey=4acadd1&s=fast%20and&type=movie"
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: URL(string: strURL)!) { (data, response, err) in
+            guard let data = data,err == nil else { return }
+            
+        }
+        task.resume()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

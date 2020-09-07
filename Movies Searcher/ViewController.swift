@@ -35,10 +35,30 @@ class ViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,U
         guard let text = txtFieldSearchMovie.text,txtFieldSearchMovie.text != "" else {
             return
         }
-        let strURL = "http://www.omdbapi.com/?apikey=4acadd1&s=fast%20and&type=movie"
+        let strURL = "https://www.omdbapi.com/?apikey=4acadd1&s=fast%20and&type=movie"
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: URL(string: strURL)!) { (data, response, err) in
             guard let data = data,err == nil else { return }
+            var objResult: MovieResult?
+            do{
+                objResult = try JSONDecoder().decode(MovieResult.self, from: data)
+            }catch{
+                print("Error While Decoding !!")
+            }
+            
+            guard let finalResult = objResult else { return }
+            print(finalResult.Search[0].Title)
+            
+            //Update Array
+            self.arrMovie.removeAll()
+            let newData = finalResult.Search
+            self.arrMovie.append(contentsOf: newData)
+            
+            //Update TableView
+            DispatchQueue.main.async {
+                self.tableListMovies.reloadData()
+            }
+            
             
         }
         task.resume()
